@@ -11,13 +11,27 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.team30.dao.SecuritiesItemDao;
+import com.team30.model.Cost;
 import com.team30.model.Income;
+import com.team30.model.SecuritiesItem;
 import com.team30.model.User;
+import com.team30.service.ReportService;
  
 
 public class ReportServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+    
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ReportServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 	/**
 	 * The doGet method of the servlet. <br>
 	 *
@@ -62,36 +76,36 @@ public class ReportServlet extends HttpServlet {
 
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("UTF-8");
-		
+		HttpSession session = request.getSession();
+		User user =(User)  session.getAttribute("currentUser");
+		String userId = user.getIdCard();
 		String date = request.getParameter("date");
 		String type = request.getParameter("query_search");
-		System.out.println(date);
-		System.out.println(type);
-//		if(type.equals("query_in")){
-//			ReportService.queryIncome(date,new User().getIdCard());
-//			ReportService.queryItem(date,new User().getIdCard(),1);
-//		}else if(type.equals("query_out")){
-//			ReportService.queryCost(date, new User().getIdCard());
-//			ReportService.queryItem(date,new User().getIdCard(),2);
-//		}else{
-//			ReportService.queryCost(date,"");
-//			ReportService.queryItem(date,new User().getIdCard(),3);
-//			ReportService.queryCost(date,new User().getIdCard());
-//		}
-		User user=new User();
-		user.setUserName("da");
-		Income u=new Income();
-		u.setIncomeCount(2);
-		u.setIncomeDate("2015-1");
-		u.setIncomeOwner(user);
-		u.setIncomeSource("da");
-		u.setIncomeType(2);
-		ArrayList<Income> incomeList = new ArrayList<Income>();
-		incomeList.add(u);
-		request.setAttribute("incomeList", incomeList);
-		RequestDispatcher rd = request.getRequestDispatcher("/html/report.jsp");
-		rd.forward(request, response);
-		
+		if(type.equals("query_in")){
+			ArrayList<Income> incomeList=  ReportService.queryIncome(date,userId);
+			request.setAttribute("incomeList",incomeList);
+			
+		 	ArrayList<SecuritiesItem> securitiesItemList= ReportService.queryItem(date,userId,2);
+	         request.setAttribute("securitiesItemList",securitiesItemList);
+		}else if(type.equals("query_out")){
+			ArrayList<Cost> costList =  ReportService.queryCost(date,userId);
+			request.setAttribute("costList", costList);	
+			
+			ArrayList<SecuritiesItem> securitiesItemList= ReportService.queryItem(date,userId,1);
+	         request.setAttribute("securitiesItemList",securitiesItemList);
+		}else{
+			ArrayList<Cost> costList =  ReportService.queryCost(date,userId);
+			request.setAttribute("costList", costList);
+			
+			ArrayList<SecuritiesItem> securitiesItemList= ReportService.queryItem(date,userId,3);
+	         request.setAttribute("securitiesItemList",securitiesItemList);
+	         
+			ArrayList<Income> incomeList=  ReportService.queryIncome(date,userId);
+			request.setAttribute("incomeList",incomeList);
+			System.out.println("cost"+costList.size()+"secur"+securitiesItemList.size()+"income"+incomeList.size());
+		}		
+         RequestDispatcher rd=request.getRequestDispatcher("/jsp/report.jsp");
+         rd.forward(request,response);
 	}
 
 }

@@ -40,10 +40,13 @@ function doModifyRecord() {
                 aim.eq(6).text($("#form3-ID").val());
                 $("#"+oldID).attr("id",$("#form3-ID").val());
             }
-        }else{
+        }else if(data != null){
             alert(data);
             $("#form3 p.right-tip").text("");
             $("#form3 p.wrong-tip").text(data);
+        } else {
+        	$("#form3 p.right-tip").text("");
+            $("#form3 p.wrong-tip").text("");
         }
     });
     return false;

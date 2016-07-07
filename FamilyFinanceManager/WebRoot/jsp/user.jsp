@@ -71,6 +71,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li class="" alt="add"><a href="javascript:;">添加用户</a></li>
                     <li class="fix"></li>
                 </ul>
+                <%
+                HttpSession aSession = request.getSession();
+                User aUser = (User) aSession.getAttribute("currentUser") ;
+                if(aUser.isAdmin()) {
+                %>
                 <div id="what">
                     <div name="user-list">
                     <br><br>
@@ -172,6 +177,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
 
                 </div>
+        		<% } else {  %>
+        			<h2>该模块只能由管理员访问，您无法使用该功能！</h2>
+        		<%} %>
         </div>  
     </div>
     <br><br>

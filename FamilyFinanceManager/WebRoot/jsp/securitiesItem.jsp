@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <header>
 <!--         <div id="logo"><img src="../img/logo.png" alt=""></div>
  -->        <div id="system-title">家庭理财系统</div>
-        <div id="sign-out"><a href="login.html"><img src="../img/sign_out.png"> 注销</a></div>
+        <div id="sign-out"><a href="login.html"><img src="/FamilyFinanceManager/img/sign_out.png"> 注销</a></div>
     </header>
     <div id="center">
     <div id="content">
@@ -75,9 +75,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div name="tradelists-manager">
                         <h3 style="text-align: center;">证券流水账信息查询</h3>
                             <div align="center">
-                            <form id="search-form" action="/FamilyFinanceManager/SecuritiesItemManager" method="post">
-                            <input name="service"  value="search" type="text" style="display:none;">
-                                证券账户:<input type="text" id="secuser" placeholder="证券账户名"><span style="color: red" name="secuser"> *</span><br><br>
+                            <form id="search-form" action="/FamilyFinanceManager/ItemManager" method="post">
+                            <input name="service"  value="query" type="text" style="display:none;">
+                                证券账户:<input type="text" id="secuser" placeholder="证券账户名"  name="secuser"><span style="color: red"> *</span><br><br>
                                 开始时间:<input class="datainp" id="startline" type="text" placeholder="开始时间" readonly name="startDate"><span style="color: red"> *</span><br><br>
                                 截止时间:<input class="datainp" id="endline" type="text" placeholder="截止时间" readonly name="endDate"><span style="color: red"> *</span><br><br>
                                 交易类型:<input type="radio" name="type" value="sell" checked="checked"> 卖出
@@ -104,21 +104,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                             <%
                                     List<SecuritiesItem> securitiesList = null;
-                                    securitiesList = (ArrayList<SecuritiesItem>) request.getAttribute("securitiesList");
-                                    if(securitiesList == null) {
-                                        out.println("结果为空");
-                                    } else if (securitiesList.size() == 0) {
-                                        out.println("没有相应的记录");
-                                    } else {
+                                    securitiesList = (ArrayList<SecuritiesItem>) request.getAttribute("securitiesItemList");
+                                    if(securitiesList == null||securitiesList.size() == 0) {
+                                     } else {
                                         for(int i=0;i<securitiesList.size();i++){
                                             SecuritiesItem securitiesItem = (SecuritiesItem)securitiesList.get(i);
                                             %>
 
                             <tbody>
-                            <tr id="201607011">
+                            <tr id="<%=securitiesItem.getItemId()%>">
                                 <td><%=securitiesItem.getItemId()%></td>
-                                <td><%=securitiesItem.getItemTradeTypeString()%></td>
                                 <td><%=securitiesItem.getItemOwner().getSecuritiesUserId()%></td>
+                                <td><%=securitiesItem.getItemStockName()%></td>
                                 <td><%=securitiesItem.getItemTradeTypeString()%></td>
                                 <td><%=securitiesItem.getItemStockPrice()%></td>
                                 <td><%=securitiesItem.getItemStockCount()%></td>
@@ -145,8 +142,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     股票名称:<input type="text" name="modify_stock" placeholder="股票名称" value=""><span style="color: red"> *</span><br><br>
                                     股票价格:<input type="text" name="modify_price" placeholder="股价" value=""><span style="color: red"> *</span><br><br>
                                     交易股数:<input type="text" name="modify_count" placeholder="交易量" value=""><span style="color: red"> *</span><br><br>
-                                    交易时间:<input type="text" name="modify_date" class="datainp" id="tradetime" placeholder="选择时间" readonly="readonly" value=""><span style="color: red"> *</span><br><br>
-                                    交易类型:<input type="radio" name="modify_type" value="sell" checked="checked"> 卖出
+                                    交易时间:<input type="text" name="modify_date" class="datainp" id="tradetime1" placeholder="选择时间" readonly="readonly" value=""><span style="color: red"> *</span><br><br>
+                                    交易类型:<input type="radio" name="modify_type" value="卖出" checked="checked"> 卖出
+                                         <input type="radio" name="add_type" value="购入"> 购入<br><br>
                                     <p class="wrong-tip"></p>
                                     <p class="right-tip"></p>
                                     <input type="submit" class="submit-btn" value="确认修改">
@@ -163,7 +161,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             股票名称:<input type="text" name="add_stock" placeholder="股票名称"><span style="color: red"> *</span><br><br>
                             股票价格:<input type="text" name="add_price" placeholder="股价"><span style="color: red"> *</span><br><br>
                             交易股数:<input type="text" name="add_count" placeholder="交易量"><span style="color: red"> *</span><br><br>
-                            交易时间:<input type="text" name="add_date" class="datainp" id="tradetime" placeholder="选择时间"><span style="color: red"> *</span><br><br>
+                            交易时间:<input type="text" name="add_date" class="datainp" id="tradetime2" placeholder="选择时间"><span style="color: red"> *</span><br><br>
                             交易类型:<input type="radio" name="add_type" value="sell" checked="checked"> 卖出
                                     <input type="radio" name="add_type" value="buy"> 购入<br><br>
                                     <p class="wrong-tip"></p>
@@ -182,11 +180,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div>power by LZAHYY</div>
     </footer>
 
-    <script type="text/javascript" src="../js/jquery-1.12.3.min.js"></script>
-    <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../jedate/jedate.js"></script>
-    <script type="text/javascript" src="../js/main.js"></script>
-    <script type="text/javascript" src="../js/securitiesItem.js"></script>
+    <script type="text/javascript" src="/FamilyFinanceManager/js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="/FamilyFinanceManager/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/FamilyFinanceManager/jedate/jedate.js"></script>
+    <script type="text/javascript" src="/FamilyFinanceManager/js/main.js"></script>
+    <script type="text/javascript" src="/FamilyFinanceManager/js/securitiesItem.js"></script>
     <script type="text/javascript">
         jeDate({
             dateCell:"#startline",
@@ -205,7 +203,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             maxDate:"2049-12-31 00:00"
         });
         jeDate({
-            dateCell:"#tradetime",
+            dateCell:"#tradetime1",
+            format:"YYYY-MM-DD hh:mm",
+            //isinitVal:true,
+            isTime:true,
+            minDate:"2016-01-01 00:00",
+            maxDate:"2049-12-31 00:00"
+        });
+         jeDate({
+            dateCell:"#tradetime2",
             format:"YYYY-MM-DD hh:mm",
             //isinitVal:true,
             isTime:true,

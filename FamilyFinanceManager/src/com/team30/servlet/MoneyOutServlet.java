@@ -14,12 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.team30.dao.CostDao;
-import com.team30.dao.IncomeDao;
 import com.team30.dao.UserDao;
 import com.team30.model.Cost;
-import com.team30.model.Income;
 import com.team30.service.CostManager;
-import com.team30.service.IncomeManager;
 
 /**
  * Servlet implementation class MoneyOutServlet

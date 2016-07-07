@@ -1,8 +1,8 @@
-<%@ page import="java.util.*" contentType="text/html" pageEncoding="UTF-8" %>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+<%@ page language="java" import="java.util.*,com.team30.model.*" pageEncoding="UTF-8"%>
+<%@ page language="java"
+	import="java.util.List,java.util.ArrayList,com.team30.model.User,com.team30.model.Cost,com.team30.model.Income,com.team30.model.SecuritiesItem,com.team30.model.SecuritiesUser"
 %>
+
 
 <!DOCTYPE html>
 <html>
@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <header>
 <!--         <div id="logo"><img src="../img/logo.png" alt=""></div>
  -->        <div id="system-title">家庭理财系统</div>
-        <div id="sign-out"><a href="/FamilyFinanceManager/jsp/login.jsp"><img src="/FamilyFinanceManager/img/sign_out.png"> 注销</a></div>
+        <div id="sign-out"><a href="login.html"><img src="/FamilyFinanceManager/img/sign_out.png"> 注销</a></div>
     </header>
     <div id=center>
         <div id="content">
@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li>
                     <span><img src="/FamilyFinanceManager/img/money.png"> 收 支 管 理</span>
                     <ul class="tow-level">
-                            <li><a href="/FamilyFinanceManager/jsp/moneyIn.jsp">收入信息维护</a></li>
+                            <li><a href="/FamilyFinanceManager/IncomeManager">收入信息维护</a></li>
                             <li><a href="/FamilyFinanceManager/jsp/moneyOut.jsp">支出信息维护</a></li>
                     </ul>
                 </li>
@@ -93,9 +93,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                         <br>
                         <div align="center">
-                        <form id="reportForm-chooseDate" >
+                        <form id="reportForm-chooseDate" action="/FamilyFinanceManager/ReportManager" method="POST">
                             <label class="lab" >查询月份</label>
-                            <input class="datainp" id="indate_1" type="text" value="" placeholder="选择时间" readonly >
+                            <input class="datainp" id="indate_1" type="text" value="" placeholder="选择时间" readonly name="date"  >
 
 
                             <input  type="radio" name="query_search" value="query_in" >收入查询
@@ -117,28 +117,65 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <th>备注</th>
                                     </tr>
                                 </thread>
-
+								<%
+									List<Income> incomeList = null;
+									incomeList = (ArrayList<Income>) request.getAttribute("incomeList");
+									if (incomeList == null || incomeList.size() == 0) {
+									}else{
+										for(int i=0;i<incomeList.size();i++){
+											Income income = (Income)incomeList.get(i);
+											%>
                                 <tbody>
                                     <tr>
-                                        <td>工资收入</td>
-                                        <td>华科</td>
-                                        <td>小明</td>
-                                        <td>2016-1-6</td>
-                                        <td>+7000</td>
+                                        <td><%=income.getIncomeType()%></td>
+                                        <td><%=income.getIncomeSource()%></td>
+                                        <td><%=income.getIncomeOwner().getUserName()%></td>
+                                        <td><%=income.getIncomeDate()%></td>
+                                        <td><%=income.getIncomeCount() %></td>
+                                        <td><%=income.getIncomeDetails() %></td>
+                                    </tr>
+                                </tbody>
+								<%} }%>
+								<%
+									List<Cost> costList = null;
+									costList = (ArrayList<Cost>) request.getAttribute("costList");
+									if (costList == null || costList.size() == 0) {
+									}else{
+										for(int i=0;i<costList.size();i++){
+											Cost cost = (Cost)costList.get(i);
+											%>
+                                <tbody>
+                                    <tr>
+                                        <td><%=cost.getCostType()%></td>
+                                        <td><%=cost.getCostSource()%></td>
+                                        <td><%=cost.getCostOwner().getUserName()%></td>
+                                        <td><%=cost.getCostDate()%></td>
+                                        <td><%=cost.getCostCount() %></td>
+                                        <td><%=cost.getCostDetails() %></td>
+                                    </tr>
+                                </tbody>
+                                <%} } %>
+                                
+                                <%
+									List<SecuritiesItem> securitiesItemList = null;
+									securitiesItemList = (ArrayList<SecuritiesItem>) request.getAttribute("securitiesItemList");
+									if (securitiesItemList == null || securitiesItemList.size() == 0) {
+									}else{
+										for(int i=0;i<securitiesItemList.size();i++){
+											SecuritiesItem securitiesItem = (SecuritiesItem)securitiesItemList.get(i);
+											%>
+                                <tbody>
+                                    <tr>
+                                        <td>股票</td>
+                                        <td><%=securitiesItem.getItemStockName()%></td>
+                                        <td><%=securitiesItem.getItemOwner().getSecuritiesUserOwner().getUserName()%></td>
+                                        <td><%=securitiesItem.getItemTradeDate()%></td>
+                                        <td><%=securitiesItem.getItemStockCount()*securitiesItem.getItemStockPrice() %></td>
                                         <td>无</td>
                                     </tr>
                                 </tbody>
-
-                                <tbody>
-                                    <tr>
-                                        <td>其他</td>
-                                        <td>旅游</td>
-                                        <td>小花</td>
-                                        <td>2016-1-7</td>
-                                        <td>-3000</td>
-                                        <td>无</td>
-                                    </tr>
-                                </tbody>
+                                <%} } %>
+                                
 
                                 <tbody>
                                     <tr>
@@ -168,7 +205,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         jeDate({
             dateCell:"#indate_1",
-            format:"YYYY-MM ",
+            format:"YYYY-MM",
             isTime:true,
             minDate:"2016-1-1 00:00:00"
         })

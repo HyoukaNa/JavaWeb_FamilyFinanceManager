@@ -8,17 +8,17 @@ import com.team30.dao.*;
 
 
 public class ReportService {
-	public static List<Income> queryIncome(String date,String userName){
+	public static ArrayList<Income> queryIncome(String date,String userID){
 
-        return IncomeDao.findIncomeByDateAndOwener(date, UserDao.findUserByUserName(userName).getIdCard());
+        return IncomeDao.findIncomeByDateAndOwener(date, userID);
     }
 
-    public static List<Cost> queryCost(String date,String userName){
-        return CostDao.findCostWithDateAndOwner(date, UserDao.findUserByUserName(userName).getIdCard());
+    public static ArrayList<Cost> queryCost(String date,String userID){
+        return CostDao.findCostWithDateAndOwner(date, userID);
     }
     
-    public static List<SecuritiesItem> queryItem(String date,String userName,int type){
-        List<SecuritiesUser> users = SecuritiesUserDao.findSecuritiesUserByOwner(UserDao.findUserByUserName(userName).getIdCard());
+    public static ArrayList<SecuritiesItem> queryItem(String date,String userID,int type){
+        List<SecuritiesUser> users = SecuritiesUserDao.findSecuritiesUserByOwner(userID);
         ArrayList<SecuritiesItem> items = new ArrayList<SecuritiesItem>();
         for (SecuritiesUser user:
              users) {

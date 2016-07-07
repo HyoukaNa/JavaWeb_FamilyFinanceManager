@@ -287,20 +287,25 @@ public class CostDao {
 			pstmt = aconnection.prepareStatement(sql);
 			pstmt.setString(1,owner);
 		}else if (owner == null){
-			if (date.length()>7)
-				sql = "select * from FFM_INCOME where COSTDATE like "+date +"%";
+			if (date.length()<=7)
+				sql = "select * from FFM_COST where COSTDATE like "+date +"%";
 			else
-				sql = "select * from FFM_INCOME where COSTDATE like "+date;
+				sql = "select * from FFM_COST where COSTDATE like "+date;
 			pstmt = aconnection.prepareStatement(sql);
 		}else {
-			if (date.length()>7)
-				sql = "select * from FFM_INCOME where COSTOWNER=? AND COSTDATE like "+date +"%";
-			else
-				sql = "select * from FFM_INCOME where COSTOWNER=? AND COSTDATE like "+date;
+			if (date.length()<=8){
+				System.out.println(date+"%");
+				sql = "select * from FFM_COST where COSTOWNER=? AND COSTDATE like "+date+"%";
+				pstmt = aconnection.prepareStatement(sql);
+				pstmt.setString(1,owner);
+			}
+			else{
+				sql = "select * from FFM_COST where COSTOWNER=? AND COSTDATE like "+date;
 			pstmt = aconnection.prepareStatement(sql);
 			pstmt.setString(1,owner);
+			}
 		}
-			rs = pstmt.executeQuery(sql);
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Cost cost = new Cost();
 				cost = new Cost();

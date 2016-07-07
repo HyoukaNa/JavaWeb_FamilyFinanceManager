@@ -284,18 +284,25 @@ public class IncomeDao {
 				pstmt = aconnection.prepareStatement(sql);
 				pstmt.setString(1,owner);
 			}else if (owner == null){
-				if (date.length()>7)
+				if (date.length()<=7)
 					sql = "select * from FFM_INCOME where INCOMEDATE like "+date +"%";
 				else
-					sql = "select * from FFM_INCOME where INCOMEDATE like "+date;
+					sql = "select * from FFM_INCOME where INCOMEDATE = "+date;
 				pstmt = aconnection.prepareStatement(sql);
 			}else {
-				if (date.length()>7)
-					sql = "select * from FFM_INCOME where INCOMEOWNER=? AND INCOMEDATE like "+date +"%";
-				else
-					sql = "select * from FFM_INCOME where INCOMEOWNER=? AND INCOMEDATE like "+date;
-				pstmt = aconnection.prepareStatement(sql);
-				pstmt.setString(1,owner);
+				System.out.println(date+ "%");
+				System.out.println(owner);
+				if (date.length()<=8){
+					sql = "select * from FFM_INCOME where INCOMEOWNER=? AND INCOMEDATE like ?%";
+					pstmt = aconnection.prepareStatement(sql);
+					pstmt.setString(1,owner);
+					pstmt.setString(2,date);
+				}
+				else{
+					sql = "select * from FFM_INCOME where INCOMEOWNER=? AND INCOMEDATE = "+date;
+					pstmt = aconnection.prepareStatement(sql);
+					pstmt.setString(1,owner);
+				}
 			}
 			Income income = null;
 			ResultSet rs = null;

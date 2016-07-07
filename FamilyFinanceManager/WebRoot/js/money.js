@@ -87,6 +87,7 @@ $(document).ready(function(){
     $("a.modify").click(modifyRceord);
     $("a.delete").click(function () {
         var temp=$(this).parent().siblings();
+        var that=$(this).parent().parent();
         if(confirm("是否确认删除？")){
             $.post("",{
                 service:"delete",
@@ -94,7 +95,7 @@ $(document).ready(function(){
             },function (data,status) {
                 if(data=="true"){
                     alert("已成功删除");
-                    $(this).parent().parent().remove();
+                    that.remove();
                 }else{
                     alert("删除失败");
                 }
