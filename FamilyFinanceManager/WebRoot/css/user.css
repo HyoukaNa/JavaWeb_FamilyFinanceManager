@@ -1,0 +1,38 @@
+input.search-btn{
+    width: 40px;
+    height: 2em;
+    border: none;
+    background-color: white;
+    color: black;
+    border: 0.5px solid lightgrey;
+}
+#form1{
+    padding-left: 5px;
+}
+#form2,#form3{
+    padding-left:20px ;
+}
+form input[type="text"],form input[type="password"],#manager_form input[type="text"],#manager_form input[type="number"],#form1 input[type="text"],#form2 input[type="text"],#form3 input[type="text"]{
+    border:1px solid lightgray;
+    width: 150px;
+    height: 30px;
+    font-size: 1em;
+    background: rgba(255,255,255,0.9);
+    transition: all 0.2s linear;
+}
+form input[type="text"]:focus,form input[type="password"]:focus,#manager_form input[type="text"]:focus,#manager_form input[type="number"]:focus,#form1 input[type="text"]:focus,#form2 input[type="text"]:focus,#form3 input[type="text"]:focus{
+    border: 1px solid lightseagreen;
+}
+input.submit-btn{
+    width: 80px;
+    height: 30px;
+    border: 1px solid lightgrey;
+    background-color: cadetblue;
+    border-radius: 0.2em;
+    transition: all 0.2s linear;
+    color: white;
+    font-size: medium;
+}
+input.submit-btn:hover{
+    background-color: steelblue;
+}

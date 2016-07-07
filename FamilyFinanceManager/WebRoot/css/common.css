@@ -1,0 +1,134 @@
+body{
+    margin:0px;
+    background: #FFFFFF   url(../img/background.jpg) repeat-y fixed;
+    background-size: 100% 100%;
+    position: relative;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+a:focus{
+    text-decoration: none;
+    outline: none;
+}
+header{
+    width: 100%;
+    height: 48px;
+    background-color: rgba(47,79,79,0.5);
+    color: white;
+    font-size: 2.5em;
+}
+#logo{
+    width: auto;
+    height: 100%;
+    float: left;
+}
+#system-title{
+    height: 100%;
+    float: left;
+    margin: 0px 20px;
+}
+#sign-out{
+    height: 100%;
+    float: right;
+    font-size: 0.6em;
+    margin:0px 20px;
+    line-height: 48px;
+}
+#sign-out img{
+    height: 24px;
+}
+#sign-out:hover:hover{
+    cursor: pointer;
+}
+#center{
+    position:relative;
+    width: 100%;
+    height: 600px;
+}
+#login-form{
+    position: absolute;
+    width: 280px;
+    height:300px; 
+    top: 25%;
+    right: 5%;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 1em;
+    padding: 50px 30px;
+    color: white;
+}
+#login-form a{
+    color: white;
+}
+#username,#password,#password-again,#userID{
+    color: black;
+    display: block; 
+    border:1px solid lightgray;
+    width: 100%;
+    height: 40px;
+    font-size: 1.2em;
+    background: rgba(255,255,255,0.9);
+    transition: all 0.2s linear;
+}
+#username:focus,#password:focus,#password-again:focus,#userID:focus{
+    border: 1px solid lightseagreen;
+}
+p.wrong-tip{
+    color: firebrick;
+    font-size: 1.2em;
+}
+p.right-tip{
+    color:steelblue;
+    font-size: 1.2em;
+}
+#submit{
+    display: block;
+    width: 100%;
+    height: 40px;
+    border:none;
+    color: white;
+    background-color:rgba(0,134,139,0.65) ; 
+    font-size: 2em;
+    transition: all 0.2s linear;
+}
+#submit:hover{
+    background-color:rgba(0,134,139,0.95);
+}
+#register-form{
+    position: absolute;
+    width: 20%;
+    height:350px; 
+    top: 20%;
+    left: 40%;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 1em;
+    padding: 50px 30px;
+    color: white;
+}
+footer{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    border-top:1px solid grey;
+    background-color:rgba(255,255,255,0.1); 
+    height: 30px;
+    color: darkslategray;
+}
+footer div{
+    width: 100%;
+    height: 100%;
+    font-size: 1.2em;
+    text-align: center;
+}
+#sign-out a{
+    color: white;
+    transition: all 0.2s linear;
+}
+#sign-out a:hover{
+    color:lightcyan;
+}
+
+

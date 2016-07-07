@@ -1,0 +1,122 @@
+body{
+    margin:0px;
+    background: #FFFFFF   url(../img/background.jpg) repeat-y fixed;
+    background-size: 100% 100%;
+    position: relative;
+}
+#content{
+    width: 80%;
+    margin:50px auto;
+}
+#left{
+    width: 25%;
+    height: 400px;
+    float: left;
+    background-color:rgba(0,134,139,0.4);
+}
+#right{
+    position: relative;
+    width: 70%;
+    min-height: 600px;
+    float: right;
+    background-color: rgba(255,255,255,0.8);
+    margin-bottom: 200px;
+}
+ul.one-level,ul.tow-level{
+    margin:0px;
+    padding-left: 20px;
+}
+ul.one-level{
+    list-style-type:none;
+    text-align: center;
+}
+ul.tow-level{
+    font-size: 1.2em;
+    text-align: left;
+    padding-left:40%;
+}
+ul.one-level span:hover{
+    cursor: pointer;
+}
+ul.one-level span{
+    font-size: 2em;
+    line-height: 2em;
+    width: 100%;
+}
+ul.one-level span a{
+    display: block;
+    color: white;
+}
+ul.one-level img{
+    width: 1.5em;
+    height: 1.5em;
+}
+
+ul.one-level li{
+    width: 100%;
+    color: white;
+    height: auto;
+}
+ul.tow-level li a{
+    display: block;
+    color: white;
+}
+nav{
+    position: absolute;
+    top: -40px;
+    left: 0px;
+    height:30px;
+    line-height: 30px;
+    font-size: 1.2em;
+    color: white;
+}
+nav span.nav-first img{
+    width: 35px;
+    height: 30px;
+}
+nav span a{
+    color: white;
+}
+nav span a:hover{
+    color: white;
+}
+
+ul.third-level{
+    margin:0px;
+    padding: 0px;
+    list-style-type: none;
+    font-size: 1.3em;
+    width: 100%;
+    height: 2.5em;
+    overflow: hidden;
+}
+ul.third-level li{
+    padding: 5px;
+    width: auto;
+    height: 2.5em;
+    display: block;
+    border-bottom: 1px solid lightgrey;
+    float: left;
+    line-height: 2em;
+    background-color: rgba(255,255,255,0.7);
+}
+ul.third-level li.current{
+    border: 1px solid lightgrey;
+    border-bottom:none; 
+    border-top:none;
+    background-color: rgba(255,255,255,0);
+}
+ul.third-level li a{
+    display: block;
+    color: rgb(100,100,100);
+}
+ul.third-level li.current a{
+    color: steelblue;
+}
+
+#what>div{
+    position: relative;
+    width: 100%;
+}
+
+

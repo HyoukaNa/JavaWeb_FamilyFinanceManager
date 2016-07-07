@@ -1,0 +1,58 @@
+form input[type="text"],form input[type="password"],form select{
+    border:1px solid lightgray;
+    width: 150px;
+    height: 30px;
+    font-size: 1em;
+    background: rgba(255,255,255,0.9);
+    transition: all 0.2s linear;
+}
+form input[type="text"]:focus,form input[type="password"]:focus{
+    border: 1px solid lightseagreen;
+}
+input.submit-btn{
+    width: 80px;
+    height: 30px;
+    border: 1px solid lightgrey;
+    background-color: cadetblue;
+    border-radius: 0.2em;
+    transition: all 0.2s linear;
+    color: white;
+    font-size: medium;
+}
+input.submit-btn:hover{
+    background-color: #122b40;
+}
+a.return{
+    display: block;
+    width: 120px;
+    height: 2em;
+    border: 1px solid lightgray;
+    background-color: cadetblue;
+    color: white;
+    font-size: medium;
+    transition: all 0.1s linear;
+    line-height: 2em;
+}
+a.return:hover{
+    background-color: steelblue;
+}
+#reset-btn{
+    text-align: center;
+    width: 80px;
+    height: 30px;
+    font-size: medium;
+    display: block;
+    border: 1px solid lightgray;
+    background-color: #265a88;
+    color: white;
+    border-radius: 0.2em;
+}
+#reset-btn:hover{
+    background-color: #122b40;
+}
+textarea{
+    border: 1px solid lightgray;
+}
+textarea:focus{
+    border: 1px solid lightseagreen;
+}
